@@ -63,6 +63,7 @@ public sealed partial class MainPage : Page
         {           
             var data = (sender as ToggleButton).DataContext as Apartment;  //currently selected DataClass
             RoomGridView.ItemsSource = data.Rooms;
+            ApartmentCollection[0].Rooms[0].IsOpened = false;
         }
     }
 }

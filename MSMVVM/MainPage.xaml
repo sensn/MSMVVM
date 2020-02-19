@@ -11,9 +11,11 @@
     <Page.Resources>
         <DataTemplate x:DataType="local:Room" x:Key="RoomItemTemplate">
             <ToggleButton IsChecked="{x:Bind IsOpened}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <!--<Rectangle Width="100" Height="100" Fill="Blue" Stroke="Red" />-->
         </DataTemplate>
         <DataTemplate x:DataType="local:Apartment" x:Key="ApartmentItemTemplate">
             <ToggleButton Content="{x:Bind Name}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="RToggle_Click" />
+           
         </DataTemplate>
     </Page.Resources>
 
@@ -28,19 +30,29 @@
         </Grid.RowDefinitions>
 
 
-        <GridView ItemTemplate="{StaticResource RoomItemTemplate}"
+        <!--<GridView ItemTemplate="{StaticResource RoomItemTemplate}"
           x:Name="RoomGridView" 
                   Grid.Column="0" Grid.Row="0">
             <GridView.ItemsPanel >
                 <ItemsPanelTemplate>
                     <controls:UniformGrid Columns="16" Rows="5" />
-                    <!--<controls:StaggeredPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />-->
+                    --><!--<controls:StaggeredPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />--><!--
                 </ItemsPanelTemplate>
             </GridView.ItemsPanel>
-       </GridView>
-            
-           
-       
+       </GridView>-->
+
+        <ItemsControl ItemTemplate="{StaticResource RoomItemTemplate}"
+  x:Name="RoomGridView"
+          Grid.Column="0" Grid.Row="0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <controls:UniformGrid Columns="16" Rows="5" ColumnSpacing="4" RowSpacing="4" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+
+
         <GridView ItemTemplate="{StaticResource ApartmentItemTemplate}"
           x:Name="ApartmentGridView"
           ItemsSource="{x:Bind ApartmentCollection}"
