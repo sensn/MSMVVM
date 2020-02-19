@@ -15,24 +15,16 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// Die Elementvorlage "Leere Seite" wird unter https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x407 dokumentiert.
-
 namespace MSMVVM
 {
-    /// <summary>
-    /// Eine leere Seite, die eigenständig verwendet oder zu der innerhalb eines Rahmens navigiert werden kann.
-    /// </summary>
-    ///
     public class Room
 {
     public bool IsOpened { get; set; }
     public string Name { get; set; }
-
         public Room(bool opened, string name)
         {
             this.IsOpened = opened;
             this.Name = name;
-
         }
 }
 public class Apartment
@@ -42,7 +34,7 @@ public class Apartment
 
         public Apartment()
         {
-            Rooms = new List<Room>() { new Room(true, "R"), new Room(true, "R"), new Room(true, "R") }; ;
+            Rooms = new List<Room>()  ;
             Name = "A";
         }
 }
@@ -52,31 +44,25 @@ public sealed partial class MainPage : Page
         public MainPage()
         {
             this.InitializeComponent();
-           // ApartmentGridView.ItemClick += ApartmentGridView_ItemClick;
+           
             for (int x = 0; x < 3; x++)
             {
                 ApartmentCollection.Add(new Apartment());
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 80; i++)
                 {
-                   
-                  //  ApartmentCollection[x].Rooms.Add(new Room(true, "R"));
-
+                    ApartmentCollection[x].Rooms.Add(new Room(true, "R"));
                 }
             }
         }
        public void ApartmentGridView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            Debug.WriteLine("HOHO");
-            var item = e.ClickedItem as Apartment;
-           
-          //  ApartmentGridView.Visibility = Visibility.Collapsed;
-            RoomGridView.ItemsSource = item.Rooms;
-            //for (int i = 0; i < 80; i++)
-            //{
-            //    ApartmentCollection[i].Rooms[0].IsOpened=true;
-
-
-            //}
+       {
+           var item = e.ClickedItem as Apartment;
+           RoomGridView.ItemsSource = item.Rooms;
+       }
+        public void RToggle_Click(object sender, RoutedEventArgs e)
+        {           
+            var data = (sender as ToggleButton).DataContext as Apartment;  //currently selected DataClass
+            RoomGridView.ItemsSource = data.Rooms;
         }
     }
 }

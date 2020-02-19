@@ -5,14 +5,15 @@
     xmlns:local="using:MSMVVM"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <DataTemplate x:DataType="local:Room" x:Key="RoomItemTemplate">
-            <ToggleButton IsChecked="{x:Bind IsOpened}"/>
+            <ToggleButton IsChecked="{x:Bind IsOpened}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </DataTemplate>
         <DataTemplate x:DataType="local:Apartment" x:Key="ApartmentItemTemplate">
-            <ToggleButton Content="{x:Bind Name}" />
+            <ToggleButton Content="{x:Bind Name}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="RToggle_Click" />
         </DataTemplate>
     </Page.Resources>
 
@@ -24,13 +25,21 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
             <RowDefinition Height="2*" />
-           
         </Grid.RowDefinitions>
-        
+
+
         <GridView ItemTemplate="{StaticResource RoomItemTemplate}"
           x:Name="RoomGridView" 
-                  Grid.Column="0" Grid.Row="0"
-          />
+                  Grid.Column="0" Grid.Row="0">
+            <GridView.ItemsPanel >
+                <ItemsPanelTemplate>
+                    <controls:UniformGrid Columns="16" Rows="5" />
+                    <!--<controls:StaggeredPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />-->
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+       </GridView>
+            
+           
        
         <GridView ItemTemplate="{StaticResource ApartmentItemTemplate}"
           x:Name="ApartmentGridView"
